@@ -1,7 +1,7 @@
 //Heroku server set up
 
 const express = require("express");
-const PORT = process.PORT || 3000;
+var PORT = process.env.PORT || 3001;
 
 const app = express();
 
