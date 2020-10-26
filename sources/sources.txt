@@ -1,0 +1,17 @@
+https://devcenter.heroku.com/articles/heroku-cli
+
+https://docs.oracle.com/javase/tutorial/java/javaOO/usingobject.html
+
+https://www.w3schools.com/jsref/jsref_slice_string.asp
+
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice
+
+https://www.tutorialspoint.com/javascript/string_slice.htm
+
+https://www.w3schools.com/jsref/jsref_splice.asp
+
+https://www.tutorialspoint.com/javascript/array_splice.htm
+
+https://stackoverflow.com/questions/9177049/express-js-req-body-undefined
+
+https://nodejs.org/en/knowledge/file-system/how-to-write-files-in-nodejs/
