@@ -17,13 +17,13 @@ module.exports = function(app){
     const id = req.params.id;
 
     // Decided to declare 'foundData' so then I can declare a variable down the line, like on line 20.
-    userNotes.forEach(found => {
-      if (id == found.id){
+    userNotes.forEach(foundnum => {
+      if (id == foundNum.id){
         let foundData;
-        foundData = found;
+        foundData = foundNum;
 
         // Creating a return on the data which was found from 'foundData'.
-        return res.json(found);
+        return res.json(foundNum);
       }
     });
     return res.json(false);
@@ -80,10 +80,10 @@ module.exports = function(app){
 // Got some help from tutor on lines 89 - 95.
   app.delete("/serverFile/notes/:id", (req, res) => {
     const id = req.params.id;
-    userNotes.forEach((found, index) => {
-      if(id == found.id){
+    userNotes.forEach((foundNum, index) => {
+      if(id == foundNum.id){
         let foundData;
-        foundData = found;
+        foundData = foundNum;
 
         // I need to add new elements while removing old elements when making changes to my array. I need to do this so I can get the saved userNotes under the saved id, which has a unique ID. So, I added a splice method first after declating 'foundData'.
         userNotes.splice(index,1);
