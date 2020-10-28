@@ -5,12 +5,12 @@ module.exports = function(app){
   let userNotes = require("./db/db.json");
 
 // The application must get/require the content that was just created. Which, in this case it's the 'userNotes' since it's being returned on line 9.
-  app.get("/serverFile/notes", (req, res) => {
+  app.get("/apiRoutes/notes", (req, res) => {
     return res.json(userNotes);
   });
   
 // First I created the const 'id' that should have reference variables for later down the line when coding this out.
-  app.get("/serverFile/notes/:id", (req, res) => {
+  app.get("/apiRoutes/notes/:id", (req, res) => {
     // req.params.id(get) or req.params.id.get()?? 
     
     // Used params to express the URL aspect connected.
@@ -30,7 +30,7 @@ module.exports = function(app){
   });
 
 // After the first step, I then went and created a 'post' method.
-  app.post("/serverFile/notes", (req, res) => {
+  app.post("/apiRoutes/notes", (req, res) => {
 
     // telling the constant variable 'recentNote' to save the data to the body when requested.
     // linked the element id to the constant 'recentNote'. This is becuase I want to set the boundries up to the id numbers and the correlation to the note.
@@ -78,7 +78,7 @@ module.exports = function(app){
 
 // Now I need to add a sort of way to delete and id.
 // Got some help from tutor on lines 89 - 95.
-  app.delete("/serverFile/notes/:id", (req, res) => {
+  app.delete("/apiRoutes/notes/:id", (req, res) => {
     const id = req.params.id;
     userNotes.forEach((foundNum, index) => {
       if(id == foundNum.id){
