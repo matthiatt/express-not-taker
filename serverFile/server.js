@@ -14,8 +14,8 @@ require("./routes/htmlRoutes")(app);
 
 var PORT = process.env.PORT || 3001;
 
-function handleRequest(request, response) {
-  response.end("It Works!!" + request.url);
+function handleRequest(req, res) {
+  response.end("It Works!!" + req.url);
 }
 
 var server = http.createServer(handleRequest);
