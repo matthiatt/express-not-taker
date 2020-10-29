@@ -9,13 +9,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static('public'));
 
-require("./routes/apiRoutes")(app);
-require("./routes/htmlRoutes")(app);
+require("./apiRoutes")(app);
+require("./htmlRoutes")(app);
 
 var PORT = process.env.PORT || 3001;
 
 function handleRequest(req, res) {
-  response.end("It Works!!" + req.url);
+  res.end("It Works!!" + req.url);
 }
 
 var server = http.createServer(handleRequest);
