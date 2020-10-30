@@ -3,23 +3,21 @@
 // **NOTE** if changes need to be made on this end I will do so after testing.
 var http = require('http');
 const express = require("express");
+const apiRoutes = require("./apiRoutes");
+const htmlRoutes = require("./htmlRoutes");
+
 const app = express();
+var PORT = process.env.PORT || 3001;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static('public'));
+app.use("/", apiRoutes);
+app.use("/", htmlRoutes);
 
-require("./apiRoutes")(app);
-require("./htmlRoutes")(app);
-
-var PORT = process.env.PORT || 3001;
 
 function handleRequest(req, res) {
   res.end("It Works!!" + req.url);
 }
 
-var server = http.createServer(handleRequest);
-
-server.listen(PORT, function() {
-  console.log("Server listening on: http://localhost:" + PORT);
-});
+app.listen(PORT, () => console.log(`Listening on PORT: ${PORT}`));

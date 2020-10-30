@@ -1,16 +1,17 @@
 const fs = require("fs");
+const router = require("express").Router();
 
 // Down below, I want to export the files here with a global scope of what I want it to encompass.  The reason being is becuase I want the contents within this file to obtain what I am linking.  In this case, I am linking the file 'db' and then linking the content within the file, which is named 'db.json'.
-module.exports = function(app){
+module.exports = function(app) {
   let userNotes = require("../db/db.json");
 
 // The application must get/require the content that was just created. Which, in this case it's the 'userNotes' since it's being returned on line 9.
-  app.get("/apiRoutes/notes", (req, res) => {
+  router.get("/apiRoutes/notes", (req, res) => {
     return res.json(userNotes);
   });
   
 // First I created the const 'id' that should have reference variables for later down the line when coding this out.
-  app.get("/apiRoutes/notes/:id", (req, res) => {
+  router.get("/apiRoutes/notes/:id", (req, res) => {
     // req.params.id(get) or req.params.id.get()?? 
     
     // Used params to express the URL aspect connected.
@@ -30,7 +31,7 @@ module.exports = function(app){
   });
 
 // After the first step, I then went and created a 'post' method.
-  app.post("/apiRoutes/notes", (req, res) => {
+  router.post("/apiRoutes/notes", (req, res) => {
 
     // telling the constant variable 'recentNote' to save the data to the body when requested.
     // linked the element id to the constant 'recentNote'. This is becuase I want to set the boundries up to the id numbers and the correlation to the note.
@@ -74,6 +75,8 @@ module.exports = function(app){
         }}});
   });
     };
+
+    module.exports = router;
 
 
 // Now I need to add a sort of way to delete and id.
