@@ -4,7 +4,7 @@ const { v4: uuidv4 } = require("uuid");
 
 module.exports = (app) => {
   app.post("/api/notes", function (req, res) {
-    let createdNote = req.body; //Need to Id to create note.
+    let createdNote = req.body;
     createdNote.id = uuidv4();
     // console.log("uuid", uuidv4());
     console.log(createdNote);
@@ -18,7 +18,6 @@ module.exports = (app) => {
     });
     function updateDb(noteTaker) {
       fs.writeFile("db/db.json", JSON.stringify(noteTaker, "\t"), (err) => {
-        //Update the json file
         if (err) throw err;
         return true;
       });
@@ -38,26 +37,41 @@ module.exports = (app) => {
       var noteTaker = JSON.parse(data);
       res.json(noteTaker);
     });
-    // res.json(noteTaker[req.params.id]);
   });
+  // app.delete("/api/notes/:id", function (req, res) {
+  //   console.log(req.params);
+  //   fs.readFile("db/db.json", "utf8", (err, data) => {
+  //     if (err) throw err;
+  //     var noteTaker = JSON.parse(data);
+  //     res.json(noteTaker);
+  //     noteTaker.splice(req.params.id);
+  //     if (!req.params.id) {
+  //       return res.status(400).json({
+  //         status: "error",
+  //         error: "req body cannot be empty",
+  //       });
+  //       // If there is an Id, then remove that item from the Json file.
+  //     }
+  //   });
+  //   // noteTaker(req.params.id);
+  //   // updateDb();
+  //   console.log("Deleted note with id " + req.params.id);
+  // });
   app.delete("/api/notes/:id", function (req, res) {
-    console.log(req.params);
-    fs.readFile("db/db.json", "utf8", (err, data) => {
+    var deleteNote = req.params.id;
+
+    fs.readFile("db/db.json", "utf8", function (err, data) {
       if (err) throw err;
-      var noteTaker = JSON.parse(data);
-      res.json(noteTaker);
-      noteTaker.splice(req.params.id);
-      if (!req.params.id) {
-        return res.status(400).json({
-          status: "error",
-          error: "req body cannot be empty",
-        });
-        // If there is an Id, then remove that item from the Json file.
-      }
+
+      var note = JSON.parse(data);
+      var index = parseInt(deleteNote) - 1;
+      note.splice(index, 1);
+
+      fs.writeFile("db/db.json", JSON.stringify(note), "utf8", function (err) {
+        if (err) throw err;
+      });
     });
-    // noteTaker(req.params.id);
-    // updateDb();
-    console.log("Deleted note with id " + req.params.id);
+    res.send(deleteNote);
   });
 
   app.get("/notes", function (req, res) {
